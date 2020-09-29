@@ -17,20 +17,24 @@ public class LocationPopupPage extends BasePage {
 		this.getSelectLocationInHeader().click();
 	}
 
-	public void setLocation(String locationName) {
+	public void closePopup() {
+		this.getCloseBtn().click();
+	}
 
+	public void setLocation(String locationName) {
 		this.clickOnKeyword();
 		String dataValue = this.getDataValue(locationName);
 
 		JavascriptExecutor jse = (JavascriptExecutor) this.driver;
-		String script = "arguments[0].value=arguments[1]";
-		jse.executeScript(script, locationName, dataValue);
+		String scriptOne = "arguments[0].value=arguments[1]";
+		jse.executeScript(scriptOne, locationName, dataValue);
 
+		String scriptTwo = "arguments[0].click()";
+		jse.executeScript(scriptTwo, this.getSubmit());
 	}
 
 	public String getDataValue(String locationName) {
 		return this.getLocationItem(locationName).getAttribute("data-value");
-
 	}
 
 	public void clickOnKeyword() {
