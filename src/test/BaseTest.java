@@ -23,11 +23,11 @@ public abstract class BaseTest {
 	
 	protected WebDriver driver;
 	protected WebDriverWait wait;
-	protected String baseUrl = "demo.yo-meals.com";
+	protected JavascriptExecutor jsExecutor;
 	protected SoftAssert softAssert;
+	protected String baseUrl = "demo.yo-meals.com";
 	protected String email = "customer@dummyid.com";
 	protected String password = "12345678a";
-	protected JavascriptExecutor jsExecutor;
 
 	@BeforeClass
 	public void setUp() {
