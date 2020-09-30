@@ -14,8 +14,8 @@ public class ProfilePage extends BasePage {
 		super(driver, wait, jsExecutor);
 	}
 
-	public void changeBasicInfo(String firstName, String lastName, String address, String phone, String country,
-			String state, int cityIndex) {
+	public void changeBasicInfo(String firstName, String lastName, String address, String phone, String zip,
+			String country, String state, int cityIndex) {
 
 		this.getFirstName().clear();
 		this.getFirstName().sendKeys(firstName);
@@ -25,6 +25,8 @@ public class ProfilePage extends BasePage {
 		this.getAddress().sendKeys(address);
 		this.getPhone().clear();
 		this.getPhone().sendKeys(phone);
+		this.getZipCode().clear();
+		this.getZipCode().sendKeys(zip);
 
 		this.getCountrySelect().selectByVisibleText(country);
 		this.getStateSelect().selectByValue(state);
