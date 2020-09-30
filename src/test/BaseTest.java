@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -19,19 +20,21 @@ import org.testng.annotations.BeforeClass;
 import org.testng.asserts.SoftAssert;
 
 public abstract class BaseTest {
-
+	
 	protected WebDriver driver;
 	protected WebDriverWait wait;
 	protected String baseUrl = "demo.yo-meals.com";
 	protected SoftAssert softAssert;
 	protected String email = "customer@dummyid.com";
 	protected String password = "12345678a";
+	protected JavascriptExecutor jsExecutor;
 
 	@BeforeClass
 	public void setUp() {
 		System.setProperty("webdriver.chrome.driver", "driver-lib\\chromedriver.exe");
 		this.driver = new ChromeDriver();
 		this.wait = new WebDriverWait(driver, 15);
+		this.jsExecutor = (JavascriptExecutor) this.driver;
 		this.softAssert = new SoftAssert();
 
 		this.driver.manage().timeouts().pageLoadTimeout(20, TimeUnit.SECONDS);

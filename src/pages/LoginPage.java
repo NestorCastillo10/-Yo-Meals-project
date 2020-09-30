@@ -1,6 +1,7 @@
 package pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -8,8 +9,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class LoginPage extends BasePage {
 
 	// ctor
-	public LoginPage(WebDriver driver, WebDriverWait wait) {
-		super(driver, wait);
+	public LoginPage(WebDriver driver, WebDriverWait wait, JavascriptExecutor jsExecutor) {
+		super(driver, wait, jsExecutor);
 	}
 
 	public void login(String name, String pass) {

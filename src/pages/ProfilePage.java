@@ -10,8 +10,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class ProfilePage extends BasePage {
 
 	// ctor
-	public ProfilePage(WebDriver driver, WebDriverWait wait) {
-		super(driver, wait);
+	public ProfilePage(WebDriver driver, WebDriverWait wait, JavascriptExecutor jsExecutor) {
+		super(driver, wait, jsExecutor);
 	}
 
 	public void changeBasicInfo(String firstName, String lastName, String address, String phone, String country,
@@ -19,29 +19,26 @@ public class ProfilePage extends BasePage {
 
 		this.getFirstName().clear();
 		this.getFirstName().sendKeys(firstName);
-
 		this.getLastName().clear();
 		this.getLastName().sendKeys(lastName);
-
 		this.getAddress().clear();
 		this.getAddress().sendKeys(address);
-
 		this.getPhone().clear();
 		this.getPhone().sendKeys(phone);
 
 		this.getCountrySelect().selectByVisibleText(country);
 		this.getStateSelect().selectByValue(state);
 		this.getCitySelect().selectByIndex(cityIndex);
-		
+
 		this.clickOnSaveBtn();
 	}
 
 	public void clickUploadFile() {
-		JavascriptExecutor jse = (JavascriptExecutor) this.driver;
-		String scriptOne = "arguments[0].click();";
-		jse.executeScript(scriptOne, this.getUploadFile());
 
-		this.getUploadFile().click(); // mozda bez ovoga
+		String scriptOne = "arguments[0].click();";
+		jsExecutor.executeScript(scriptOne, this.getUploadFile());
+
+		this.getUploadFile().click(); // is this necessary?
 	}
 
 	public void uploadImage(String path) {
@@ -49,9 +46,11 @@ public class ProfilePage extends BasePage {
 	}
 
 	public void deleteImage() {
-		JavascriptExecutor jse = (JavascriptExecutor) this.driver;
+
 		String scriptOne = "arguments[0].click();";
-		jse.executeScript(scriptOne, this.getRemoveBtn());
+		jsExecutor.executeScript(scriptOne, this.getRemoveBtn());
+
+		// Mouse Hover action??
 	}
 
 	public void clickOnSaveBtn() {
@@ -95,12 +94,12 @@ public class ProfilePage extends BasePage {
 		return this.driver.findElement(By.name("btn_submit"));
 	}
 
-//ovo
+	// is this method necessary
 	public WebElement getHoverElement() {
 		return this.driver.findElement(By.className("hover-elemnts"));
 	}
 
-	// ovo
+	// is this method necessary
 	public void clickOnHOverElement() {
 		this.getHoverElement().click();
 	}
@@ -112,5 +111,4 @@ public class ProfilePage extends BasePage {
 	public WebElement getRemoveBtn() {
 		return this.driver.findElement(By.xpath("//a[@class='remove']"));
 	}
-
 }
