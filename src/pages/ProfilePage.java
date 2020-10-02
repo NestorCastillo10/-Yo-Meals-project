@@ -15,7 +15,7 @@ public class ProfilePage extends BasePage {
 	}
 
 	public void changeBasicInfo(String firstName, String lastName, String address, String phone, String zip,
-			String country, String state, int cityIndex) {
+			String country, int stateIndex, int cityIndex) throws InterruptedException {
 
 		this.getFirstName().clear();
 		this.getFirstName().sendKeys(firstName);
@@ -29,34 +29,32 @@ public class ProfilePage extends BasePage {
 		this.getZipCode().sendKeys(zip);
 
 		this.getCountrySelect().selectByVisibleText(country);
-		this.getStateSelect().selectByValue(state);
+		Thread.sleep(300);
+		this.getStateSelect().selectByIndex(stateIndex);
+		Thread.sleep(300);
 		this.getCitySelect().selectByIndex(cityIndex);
-
 		this.clickOnSaveBtn();
-	}
 
-	public void clickUploadFile() {
-
-		String scriptOne = "arguments[0].click();";
-		jsExecutor.executeScript(scriptOne, this.getUploadFile());
-
-		this.getUploadFile().click(); // is this necessary?
+		// Thread.sleep(300) method is to synchronize all three select elements
 	}
 
 	public void uploadImage(String path) {
-		this.getUploadFile().sendKeys(path);
+		String script = "arguments[0].click();";
+		jsExecutor.executeScript(script, this.getCamera());
+
+		this.getUploadForm().sendKeys(path);
 	}
 
 	public void deleteImage() {
-
-		String scriptOne = "arguments[0].click();";
-		jsExecutor.executeScript(scriptOne, this.getRemoveBtn());
-
-		// Mouse Hover action??
+		String script = "arguments[0].click();";
+		jsExecutor.executeScript(script, this.getRemoveBtn());
 	}
 
 	public void clickOnSaveBtn() {
-		this.getSaveBtn().click();
+		// this.getSaveBtn().click();
+
+		String script = "arguments[0].click();";
+		jsExecutor.executeScript(script, this.getSaveBtn());
 	}
 
 	// getters
@@ -96,17 +94,11 @@ public class ProfilePage extends BasePage {
 		return this.driver.findElement(By.name("btn_submit"));
 	}
 
-	// is this method necessary
-	public WebElement getHoverElement() {
-		return this.driver.findElement(By.className("hover-elemnts"));
+	public WebElement getUploadForm() {
+		return this.driver.findElement(By.xpath("//*[@id='form-upload']/input"));
 	}
 
-	// is this method necessary
-	public void clickOnHOverElement() {
-		this.getHoverElement().click();
-	}
-
-	public WebElement getUploadFile() {
+	public WebElement getCamera() {
 		return this.driver.findElement(By.xpath("//a[@class='upload uploadFile-Js']"));
 	}
 
