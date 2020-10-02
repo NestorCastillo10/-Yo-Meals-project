@@ -21,8 +21,7 @@ public class CartSummaryPage extends BasePage {
 		this.getClearAllBtn().click();
 	}
 
-	// getter
 	public WebElement getClearAllBtn() {
 		return this.driver.findElement(By.xpath("//div[@class='cart-head']/child::a[last()] "));
-	} // proveri da li je klikabilno dugme odmah u startu??
+	}
 }
