@@ -13,15 +13,16 @@ public class LocationPopupPage extends BasePage {
 		super(driver, wait, jsExecutor);
 	}
 
-	public void setLocation(String locationName) {
+	public void setLocation(String locationName) throws InterruptedException {
+		String script = "";
 		this.clickOnKeyword();
-		String dataValue = this.getDataValue(locationName);
+		this.getLocationItem(locationName);
+		// String dataValue = this.getDataValue(locationName);
 
-		String scriptOne = "arguments[0].value=arguments[1]";
-		jsExecutor.executeScript(scriptOne, locationName, dataValue);
-
-		String scriptTwo = "arguments[0].click()";
-		jsExecutor.executeScript(scriptTwo, this.getSubmit());
+		script = "arguments[0].value=arguments[1];";
+		jsExecutor.executeScript(script, this.getLocationInput(), this.getDataValue(locationName));
+		script = "arguments[0].click();";
+		jsExecutor.executeScript(script, this.getSubmit());
 	}
 
 	public void showPopup() {
@@ -36,7 +37,7 @@ public class LocationPopupPage extends BasePage {
 		this.getKeyword().click();
 	}
 
-	// getters
+	// getters #locality_keyword
 	public WebElement getSelectLocationInHeader() {
 		return this.driver.findElement(By.xpath("//div[@class='location-selector']"));
 	}
@@ -46,11 +47,11 @@ public class LocationPopupPage extends BasePage {
 	}
 
 	public WebElement getKeyword() {
-		return this.driver.findElement(By.id("locality_keyword"));
+		return this.driver.findElement(By.xpath("//*[@id='locality_keyword']"));
 	}
 
 	public WebElement getLocationItem(String locationName) {
-		return this.driver.findElement(By.xpath("//li/a[contains(text(), 'Test - Caxito')]/parent::*"));
+		return this.driver.findElement(By.xpath("//li/a[contains(text(), '" + locationName + "')]/parent::*"));
 	}
 
 	public String getDataValue(String locationName) {
