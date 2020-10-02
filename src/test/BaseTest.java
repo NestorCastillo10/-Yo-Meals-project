@@ -20,7 +20,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.asserts.SoftAssert;
 
 public abstract class BaseTest {
-	
+
 	protected WebDriver driver;
 	protected WebDriverWait wait;
 	protected JavascriptExecutor jsExecutor;
