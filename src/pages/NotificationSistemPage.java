@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -21,8 +22,9 @@ public class NotificationSistemPage extends BasePage {
 
 	// getters
 	public WebElement getMsgElement() {
-		return this.driver.findElement(By.xpath(
-				"//*[contains(@class, 'alert--success') or contains(@class, 'alert--danger')][contains(@style,'display: block')]"));
+		WebElement alert = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
+				"//*[contains(@class, 'alert--success') or contains(@class, 'alert--danger')][contains(@style,'display: block')]")));
+		return alert;
 	}
 
 	public String getMessage() {
