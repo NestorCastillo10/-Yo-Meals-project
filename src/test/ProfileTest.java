@@ -13,7 +13,7 @@ import pages.ProfilePage;
 
 public class ProfileTest extends BaseTest {
 
-	@Test(priority = 5, description = "Testing LogIn, Editing Profile and Logout.")
+	 @Test(priority = 5, description = "Testing LogIn, Editing Profile and Logout.")
 	public void editProfile() throws InterruptedException {
 
 		LocationPopupPage locationPopupPage = new LocationPopupPage(driver, wait, jsExecutor);
@@ -51,14 +51,14 @@ public class ProfileTest extends BaseTest {
 
 		// LogOut
 		authPage.logout();
+
 		message = notificationSistemPage.getMessage();
-		this.softAssert.assertTrue(message.contains("Logout Successful!"), "[ERROR] Logout FAILED!");
+		this.softAssert.assertTrue(message.contains("Logout Successfull!"), "[ERROR] Logout FAILED!");
 
 		softAssert.assertAll();
 	}
 
-	// @Test(priority = 10, description = "Testing the Functionality of Adding and
-	// Deleting Profile Images")
+	@Test(priority = 10, description = "Testing the Functionality of Adding and Deleting Profile Images")
 	public void changeProfileImage() throws IOException, InterruptedException {
 
 		LocationPopupPage locationPopupPage = new LocationPopupPage(driver, wait, jsExecutor);
