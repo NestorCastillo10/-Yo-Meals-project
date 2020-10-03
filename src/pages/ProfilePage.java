@@ -29,13 +29,13 @@ public class ProfilePage extends BasePage {
 		this.getZipCode().sendKeys(zip);
 
 		this.getCountrySelect().selectByVisibleText(country);
-		Thread.sleep(300);
+		Thread.sleep(700);
 		this.getStateSelect().selectByIndex(stateIndex);
-		Thread.sleep(300);
+		Thread.sleep(700);
 		this.getCitySelect().selectByIndex(cityIndex);
 		this.clickOnSaveBtn();
 
-		// Thread.sleep(300) method is to synchronize all three select elements
+		// Thread.sleep() method is to synchronize all three select elements
 	}
 
 	public void uploadImage(String path) {
