@@ -1,6 +1,6 @@
 package test;
 
-import java.io.File;
+//import java.io.File;
 import java.io.IOException;
 
 import org.testng.annotations.Test;
@@ -13,7 +13,7 @@ import pages.ProfilePage;
 
 public class ProfileTest extends BaseTest {
 
-	 @Test(priority = 5, description = "Testing LogIn, Editing Profile and Logout.")
+	@Test(priority = 5, description = "Testing LogIn, Editing Profile and Logout.")
 	public void editProfile() throws InterruptedException {
 
 		LocationPopupPage locationPopupPage = new LocationPopupPage(driver, wait, jsExecutor);
@@ -28,7 +28,7 @@ public class ProfileTest extends BaseTest {
 		String lastName = "Castillo";
 		String address = "Le Cap D'Adge";
 		String phone = "+486432901";
-		String zip = "2901";
+		String zip = "007";
 		String country = "United Kingdom";
 		int stateIndex = 2;
 		int cityIndex = 1;
