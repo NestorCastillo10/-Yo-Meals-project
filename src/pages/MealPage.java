@@ -2,6 +2,7 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -14,13 +15,13 @@ public class MealPage extends BasePage {
 		super(driver, wait, jsExecutor);
 	}
 
-	public void addMeal(String qty) {
-		this.clickOnMealImg();
-		this.wait.until(ExpectedConditions.elementToBeClickable(getAddToCart()));
-		this.clickOnQty();
-		this.getQty().clear();
-		this.getQty().sendKeys(qty);
-		this.getAddToCart();
+	public void addMeal(int qty) {
+		this.getQty().sendKeys(Keys.chord(Keys.CONTROL, "a"));
+
+		String script = "arguments[0].value=arguments[1]";
+		this.jsExecutor.executeScript(script, getQty(), String.valueOf(qty));
+
+		this.clickOnAddBtn();
 	}
 
 	public void addToFavotife() {
@@ -35,9 +36,13 @@ public class MealPage extends BasePage {
 		this.getQty().click();
 	}
 
+	public void clickOnAddBtn() {
+		this.getAddToCart().click();
+	}
+
 	// getters
 	public WebElement getFavBtn() {
-		return this.driver.findElement(By.id("item_118"));
+		return this.driver.findElement(By.xpath("//div[@class='product-detail-image']/child::a"));
 	}
 
 	public WebElement getMealImage() {
@@ -45,10 +50,13 @@ public class MealPage extends BasePage {
 	}
 
 	public WebElement getAddToCart() {
-		return this.driver.findElement(By.xpath("//a[contains(.,'Add To Cart')]"));
+		WebElement btn = wait
+				.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[contains(.,'Add To Cart')]")));
+		return btn;
 	}
 
 	public WebElement getQty() {
-		return this.driver.findElement(By.name("product_qty"));
+		WebElement qty = wait.until(ExpectedConditions.elementToBeClickable(By.name("product_qty")));
+		return qty;
 	}
 }

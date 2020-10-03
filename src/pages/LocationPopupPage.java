@@ -13,11 +13,11 @@ public class LocationPopupPage extends BasePage {
 		super(driver, wait, jsExecutor);
 	}
 
-	public void setLocation(String locationName) throws InterruptedException {
+	public void setLocation(String locationName) {
 		String script = "";
+		
 		this.clickOnKeyword();
 		this.getLocationItem(locationName);
-		// String dataValue = this.getDataValue(locationName);
 
 		script = "arguments[0].value=arguments[1];";
 		jsExecutor.executeScript(script, this.getLocationInput(), this.getDataValue(locationName));
@@ -37,7 +37,7 @@ public class LocationPopupPage extends BasePage {
 		this.getKeyword().click();
 	}
 
-	// getters #locality_keyword
+	// getters 
 	public WebElement getSelectLocationInHeader() {
 		return this.driver.findElement(By.xpath("//div[@class='location-selector']"));
 	}

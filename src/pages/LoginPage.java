@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class LoginPage extends BasePage {
@@ -30,6 +31,10 @@ public class LoginPage extends BasePage {
 		this.getSubmitBtn().click();
 	}
 
+	public void clickLoginBtn() {
+		this.getLoginBtn().click();
+	}
+
 	// getters
 	public WebElement getEmailInput() {
 		return this.driver.findElement(By.name("username"));
@@ -44,6 +49,12 @@ public class LoginPage extends BasePage {
 	}
 
 	public WebElement getSubmitBtn() {
-		return this.driver.findElement(By.name("btn_submit"));
+		WebElement btn = wait.until(ExpectedConditions.elementToBeClickable(By.name("btn_submit")));
+		// return this.driver.findElement(By.name("btn_submit"));
+		return btn;
+	}
+
+	public WebElement getLoginBtn() {
+		return this.driver.findElement(By.xpath("//a[contains(.,'Login')]"));
 	}
 }
