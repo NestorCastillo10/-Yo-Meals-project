@@ -1,13 +1,7 @@
 package test;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -108,29 +102,10 @@ public class MealItemTest extends BaseTest {
 		locationPopupPage.setLocation(locationName);
 
 		// -------- data import ------
-
-		ArrayList<String> urlList = new ArrayList<>();
-
-		File file = new File("data/Data.xlsx");
-		FileInputStream fis = new FileInputStream(file);
-
-		XSSFWorkbook wb = new XSSFWorkbook(fis);
-		XSSFSheet sheet = wb.getSheet("Meals");
-
-		for (int i = 1; i < sheet.getLastRowNum() + 1; i++) {
-			XSSFRow row = sheet.getRow(i);
-
-			if (row != null) {
-				String url = row.getCell(0).getStringCellValue();
-				urlList.add(url);
-			}
-		}
-		wb.close();
-		fis.close();
+		ArrayList<String> urlList = DataImportClass.importUrls();
 
 		// Adding Meals To the Cart
 		for (int i = 0; i < urlList.size(); i++) {
-
 			this.driver.navigate().to(urlList.get(i));
 			mealPage.addMeal(orderedPortions);
 
@@ -138,6 +113,8 @@ public class MealItemTest extends BaseTest {
 			this.softAssert.assertTrue(message.contains("Meal Added To Cart"), "[ERROR] Meal IS NOT Added To Cart!!");
 		}
 		softAssert.assertAll();
+
+		notificationSistemPage.noticeIsNotVisible();
 
 		// Removing All Meals
 		cartSummaryPage.clearAll();
