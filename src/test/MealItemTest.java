@@ -14,7 +14,7 @@ import pages.NotificationSistemPage;
 public class MealItemTest extends BaseTest {
 
 	@Test(priority = 10, description = "Trying to add meal to cart without and with select location")
-	public void addMealToCard() {
+	public void addMealToCard() throws InterruptedException {
 
 		LocationPopupPage locationPopupPage = new LocationPopupPage(driver, wait, jsExecutor);
 		MealPage mealPage = new MealPage(driver, wait, jsExecutor);
@@ -73,7 +73,7 @@ public class MealItemTest extends BaseTest {
 		loginPage.login(name, pass);
 
 		message = notificationSistemPage.getMessage();
-		this.softAssert.assertTrue(message.contains("Login Successfull"), "[ERROR] Login FAILED!");
+		Assert.assertTrue(message.contains("Login Successfull"), "[ERROR] Login FAILED!");
 
 		// Add To Favorite
 		this.driver.navigate().to(this.baseUrl + "meal/west-fish-tacos-jackfruit");
@@ -87,7 +87,7 @@ public class MealItemTest extends BaseTest {
 	}
 
 	@Test(priority = 30, description = "Testing Cart Emptying Functionality ")
-	public void clearCart() throws IOException {
+	public void clearCart() throws IOException, InterruptedException {
 
 		LocationPopupPage locationPopupPage = new LocationPopupPage(driver, wait, jsExecutor);
 		MealPage mealPage = new MealPage(driver, wait, jsExecutor);
