@@ -3,9 +3,9 @@
 <suite guice-stage="DEVELOPMENT" name="Default suite">
 	<test thread-count="5" verbose="2" name="Default test">
 		<classes>
-			<class name="tests.ProfileTest" />
-			<class name="tests.MealItemTest" />
-			<class name="tests.SearchTest" />
+			<class name="test.ProfileTest" />
+			<class name="test.MealItemTest" />
+			<class name="test.SearchTest" />
 		</classes>
 	</test> <!-- Default test -->
 </suite> <!-- Default suite -->
