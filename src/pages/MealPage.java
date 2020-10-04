@@ -15,12 +15,12 @@ public class MealPage extends BasePage {
 		super(driver, wait, jsExecutor);
 	}
 
-	public void addMeal(int qty) {
+	public void addMeal(int qty) throws InterruptedException {
 		this.getQty().sendKeys(Keys.chord(Keys.CONTROL, "a"));
 
 		String script = "arguments[0].value=arguments[1]";
 		this.jsExecutor.executeScript(script, getQty(), String.valueOf(qty));
-
+		Thread.sleep(1000);
 		this.clickOnAddBtn();
 	}
 
