@@ -33,7 +33,7 @@ public abstract class BaseTest {
 
 	@BeforeClass
 	@Parameters("browser")
-	public void setUp(String browser) {
+	public void setUp(String browser) throws Exception {
 		
 		if (browser.equalsIgnoreCase("firefox")) {
 			System.setProperty("webdriver.gecko.driver", "driver-lib\\geckodriver.exe");
@@ -41,6 +41,9 @@ public abstract class BaseTest {
 		} else if (browser.equalsIgnoreCase("chrome")) {
 			System.setProperty("webdriver.chrome.driver", "driver-lib\\chromedriver.exe");
 			this.driver = new ChromeDriver();
+		}else{
+			//If no browser passed throw exception
+			throw new Exception("Browser is not correct");
 		}
 
 		this.wait = new WebDriverWait(driver, 15);
