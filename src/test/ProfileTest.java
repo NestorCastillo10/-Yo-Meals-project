@@ -1,6 +1,6 @@
 package test;
 
-//import java.io.File;
+import java.io.File;
 import java.io.IOException;
 
 import org.testng.annotations.Test;
@@ -59,7 +59,7 @@ public class ProfileTest extends BaseTest {
 	}
 
 	@Test(priority = 10, description = "Testing the Functionality of Adding and Deleting Profile Images")
-	public void changeProfileImage() throws IOException, InterruptedException {
+	public void changeProfileImage() throws IOException {
 
 		LocationPopupPage locationPopupPage = new LocationPopupPage(driver, wait, jsExecutor);
 		LoginPage loginPage = new LoginPage(driver, wait, jsExecutor);
@@ -70,8 +70,7 @@ public class ProfileTest extends BaseTest {
 		String name = "customer@dummyid.com";
 		String pass = "12345678a";
 		String message = "";
-		// String imgPath = new File("imagеs/nestor.jpg").getCanonicalPath();
-		String imgPath = "C:\\Users\\ivica\\Desktop\\Zavrsni Projekat\\-Yo-Meals-project\\images\\nestor.jpg";
+		String imgPath = new File("images/nestor.jpg").getCanonicalPath();
 
 		// LogIn
 		this.driver.navigate().to(baseUrl + "guest-user/login-form");
