@@ -65,6 +65,9 @@ public class DataImportClass {
 				}
 			}
 		}
+		wb.close();
+		fis.close();
+
 		return listOfSearches;
 	}
 
